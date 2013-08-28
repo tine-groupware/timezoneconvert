@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================== -->
+<!-- Build Definition for TimeZoneConvert                  -->
+<!--                                                       -->
+<!-- http://git.tine20.org/git?p=timezoneconvert;a=summary -->
+<!-- http://www.phing.info                                 -->
+<!-- ===================================================== -->
+<project name="timezoneconvert" description="TimeZoneConvert build file" default="test">
+
+    <!-- ============================================  -->
+    <!-- Task: autoload                                -->
+    <!-- ============================================  -->
+    <adhoc-task name="autoload"><![CDATA[
+        class autoloadTask extends Task {
+            function main() {
+                require_once 'vendor/autoload.php';
+            }
+        }
+    ]]></adhoc-task>
+
+    <!-- ============================================  -->
+    <!-- Target: test                                  -->
+    <!-- ============================================  -->
+    <target name="test" depends="compose">
+        <echo msg="Starting Tests" />
+        <exec command="phpunit --config phpunit.xml --log-junit junit_log_timezoneconvert.xml" dir="tests" passthru="true" />
+    </target>
+
+    <!-- ============================================  -->
+    <!-- Target: compose                               -->
+    <!-- ============================================  -->
+    <target name="compose">
+        <echo msg="Fetching dependencies" />
+        <exec command="composer update" passthru="true" />
+    </target>
+    
+</project>
