@@ -7,7 +7,6 @@
 <!-- http://www.phing.info                                 -->
 <!-- ===================================================== -->
 <project name="timezoneconvert" description="TimeZoneConvert build file" default="test">
-
     <!-- ============================================  -->
     <!-- Task: autoload                                -->
     <!-- ============================================  -->
@@ -34,5 +33,4 @@
         <echo msg="Fetching dependencies" />
         <exec command="composer update" passthru="true" />
     </target>
-    
 </project>
