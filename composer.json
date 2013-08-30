@@ -1,8 +1,8 @@
 {
     "name": "metaways/timezoneconvert",
-    "description": "Metaways Infosystems GmbH - Open Document Library",
+    "description": "Metaways Infosystems GmbH - TimeZoneConvert Library",
     "type": "project",
-    "keywords": ["Office", "TimeZoneConvert", "Template"],
+    "keywords": ["Timezones", "TimeZoneConvert", "UTC", "Time"],
     "homepage": "http://www.tine20.org",
     "license" : ["MIT", "BSD", "GPL"],
     "require": {
