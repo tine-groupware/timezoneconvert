@@ -112,7 +112,7 @@ class TimeZoneConvert_VTimeZone
                 }
             }
             
-            // compute offsetFrom 
+            // compute offsetFrom
             $offsetFromDate = clone $transitionRule->from;
             $offsetFromDate->setTimezone($timezone);
             $offsetFromDate->modify("-1 day");
@@ -303,7 +303,7 @@ class TimeZoneConvert_VTimeZone
                 'abbr'   => $abbr,
             ));
             
-            // transitions by RRULE 
+            // transitions by RRULE
             if (preg_match('/RRULE:(.*)/', $vTransitionRule, $rrule)) {
                 $rrule = TimeZoneConvert_VTimeZone_Rrule::createFromString($rrule[1]);
                 $transitionRule->append(array(
@@ -315,7 +315,7 @@ class TimeZoneConvert_VTimeZone
                     'numwk'  => $rrule->numwk,
                     'until'  => $rrule->until,
                 ));
-            } 
+            }
             
             // transitions by RDATE
             else if (preg_match('/RDATE.*:(?:\d{8}T\d{6}[^0-9A-Z]*)+/', $vTransitionRule, $rdate)) {
@@ -373,7 +373,7 @@ class TimeZoneConvert_VTimeZone
                 $rdatesArray[] = $rdate->format('Ymd\THis');
             }
             
-            $rule = str_replace(array(' ', self::EOL), array('', self::EOL . ' '), wordwrap('RDATE;VALUE=DATE-TIME:'. implode(', ', $rdatesArray), 90, self::EOL));
+            $rule = $this->getRule($rdatesArray, $transitionRule->abbr);
         }
         
         $vTransitionRule  = "BEGIN:$zone" . self::EOL;
@@ -385,5 +385,20 @@ class TimeZoneConvert_VTimeZone
         $vTransitionRule .= "END:$zone" . self::EOL;
         
         return $vTransitionRule;
+    }
+    
+    /**
+     * Gets a transition rule
+     * 
+     * @param array $rdatesArray
+     * @param string $tzName
+     * @return string
+     */
+    private function getRule(array $rdatesArray, $tzName)
+    {
+        if ($tzName == 'BRT' || $tzName == 'BRST') {
+            return str_replace(' ', '', 'RDATE;VALUE=DATE-TIME:'. implode(', ', $rdatesArray));
+        }
+        return str_replace(array(' ', self::EOL), array('', self::EOL . ' '), wordwrap('RDATE;VALUE=DATE-TIME:'. implode(', ', $rdatesArray), 90, self::EOL));
     }
 }
