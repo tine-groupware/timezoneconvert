@@ -124,7 +124,9 @@ class TimeZoneConvert_Transition extends TimeZoneConvert_Model
         // NOTE: DateTimeZone::getTransitions first "transition" reflects $beginTS
         //       so we make sure to not match a transition with it and throw it away
         $transitions = $endTS ? $timezone->getTransitions(--$beginTS, $endTS) : $timezone->getTransitions(--$beginTS);
-        array_shift($transitions);
+        if (is_array($transitions)) {
+            array_shift($transitions);
+        }
         
         $transitions = new TimeZoneConvert_Set($transitions);
         
