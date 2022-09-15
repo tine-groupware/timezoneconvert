@@ -81,7 +81,7 @@ class TimeZoneConvert_Transition extends TimeZoneConvert_Model
     {
         $transitionsTss = $transitions->ts;
         
-        $referenceTransitions = self::getTransitions($timezone, min($transitionsTss), max($transitionsTss) + 1);
+        $referenceTransitions = self::getTransitions($timezone, $transitionsTss ? min($transitionsTss) : null, $transitionsTss ? max($transitionsTss) + 1 : null);
         $referenceTss = $referenceTransitions->ts;
         
         $matchingReferenceTransitions = array_intersect($referenceTss, $transitionsTss);
@@ -123,7 +123,14 @@ class TimeZoneConvert_Transition extends TimeZoneConvert_Model
         
         // NOTE: DateTimeZone::getTransitions first "transition" reflects $beginTS
         //       so we make sure to not match a transition with it and throw it away
-        $transitions = $endTS ? $timezone->getTransitions(--$beginTS, $endTS) : $timezone->getTransitions(--$beginTS);
+        if (!$beginTS) {
+            $transitions = $timezone->getTransitions();
+        } elseif (!$endTS) {
+            $transitions = $timezone->getTransitions(--$beginTS);
+        } else {
+            $transitions = $timezone->getTransitions(--$beginTS, $endTS);
+        }
+
         if (is_array($transitions)) {
             array_shift($transitions);
         }

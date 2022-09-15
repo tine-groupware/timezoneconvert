@@ -9,7 +9,7 @@
  * @author      Cornelius Weiß <c.weiss@metaways.de>
  */
 
-class TimeZoneConvert_VTimeZoneTests extends PHPUnit_Framework_TestCase
+class TimeZoneConvert_VTimeZoneTests extends \PHPUnit\Framework\TestCase
 {
     
     public static $rfc5545AmericaNewYork = <<<EOT
@@ -213,7 +213,7 @@ EOT;
      */
     public $uit;
     
-    public function setUp()
+    public function setUp(): void
     {
         $this->uit = new TimeZoneConvert_VTimeZone();
     }

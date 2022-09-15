@@ -165,7 +165,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see ArrayAccess::offsetExists()
      */
-    public function offsetExists ($offset)
+    public function offsetExists ($offset): bool
     {
         return array_key_exists($offset, $this->_models);
     }
@@ -174,6 +174,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see ArrayAccess::offsetGet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet ($offset)
     {
         return $this->_models[$offset];
@@ -183,7 +184,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see ArrayAccess::offsetSet()
      */
-    public function offsetSet ($offset, $value)
+    public function offsetSet ($offset, $value): void
     {
         $this->_models[$offset] = $value;
     }
@@ -192,7 +193,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see ArrayAccess::offsetUnset()
      */
-    public function offsetUnset ($offset)
+    public function offsetUnset ($offset): void
     {
         unset ($this->_models[$offset]);
     }
@@ -201,7 +202,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see IteratorAggregate::getIterator()
      */
-    public function getIterator () {
+    public function getIterator(): \Traversable {
         return new ArrayIterator($this->_models);
     }
     
@@ -209,7 +210,7 @@ class TimeZoneConvert_Set implements ArrayAccess, IteratorAggregate, Countable
      * (non-PHPdoc)
      * @see Countable::count()
      */
-    public function count () {
+    public function count(): int {
         return count($this->_models);
     }
 }

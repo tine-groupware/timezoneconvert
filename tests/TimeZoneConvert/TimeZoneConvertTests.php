@@ -9,7 +9,7 @@
  * @author      Cornelius Weiß <c.weiss@metaways.de>
  */
 
-class TimeZoneConvert_TimeZoneConvertTests extends PHPUnit_Framework_TestCase
+class TimeZoneConvert_TimeZoneConvertTests extends \PHPUnit\Framework\TestCase
 {
     public function testFromVTimeZone()
     {

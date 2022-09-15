@@ -9,7 +9,7 @@
  * @author      Cornelius Weiß <c.weiss@metaways.de>
  */
 
-class TimeZoneConvert_TransitionRuleTests extends PHPUnit_Framework_TestCase
+class TimeZoneConvert_TransitionRuleTests extends \PHPUnit\Framework\TestCase
 {
     
     public function testComputeTransitionDateEuropeBerlinStandard()
