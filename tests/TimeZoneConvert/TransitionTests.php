@@ -9,7 +9,7 @@
  * @author      Cornelius Weiß <c.weiss@metaways.de>
  */
 
-class TimeZoneConvert_TransitionTests extends PHPUnit_Framework_TestCase
+class TimeZoneConvert_TransitionTests extends \PHPUnit\Framework\TestCase
 {
     public function testMatchTimezoneRfc5545AmericaNewYork()
     {

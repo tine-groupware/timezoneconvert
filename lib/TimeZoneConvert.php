@@ -25,8 +25,6 @@ class TimeZoneConvert
      */
     public static function fromVTimeZone($VTimeZone, $prodId = "", $expectedTimeZone = NULL)
     {
-        $expectedTimeZoneId = $expectedTimeZone instanceof DateTimeZone ? $expectedTimeZone->getName() : $expectedTimeZone;
-        
         $converter = new TimeZoneConvert_VTimeZone();
         $timeZoneId = $converter->getTZIdentifier($VTimeZone, $prodId, $expectedTimeZone);
         

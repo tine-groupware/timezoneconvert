@@ -11,14 +11,9 @@
 
 class TimeZoneConvert_AllTests
 {
-    public static function main ()
-    {
-        PHPUnit_TextUI_TestRunner::run(self::suite());
-    }
-    
     public static function suite ()
     {
-        $suite = new PHPUnit_Framework_TestSuite('TimeZoneConvert All Tests');
+        $suite = new \PHPUnit\Framework\TestSuite('TimeZoneConvert All Tests');
         $suite->addTestSuite('TimeZoneConvert_TransitionRuleTests');
         $suite->addTestSuite('TimeZoneConvert_TransitionTests');
         $suite->addTestSuite('TimeZoneConvert_VTimeZoneTests');

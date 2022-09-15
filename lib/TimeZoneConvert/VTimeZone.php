@@ -40,7 +40,7 @@ class TimeZoneConvert_VTimeZone
             }
             
             // compute timezone
-            $timezone = $this->computeTimezone($VTimeZone, $expectedTimezoneId=NULL);
+            $timezone = $this->computeTimezone($VTimeZone, $expectedTimezoneId);
             return $timezone->getName();
             
         } catch (Exception $e) {

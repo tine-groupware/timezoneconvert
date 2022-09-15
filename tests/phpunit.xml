@@ -2,12 +2,6 @@
          bootstrap="bootstrap.php"
          colors="true">
     
-    <filter>
-        <blacklist>
-            <directory suffix=".php">../tests</directory>
-        </blacklist>
-    </filter>
-    
     <testsuites>
         <testsuite name="All Tests">
             <file>TimeZoneConvert/AllTests.php</file>
