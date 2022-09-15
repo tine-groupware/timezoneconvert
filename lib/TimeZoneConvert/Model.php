@@ -81,7 +81,7 @@ abstract class TimeZoneConvert_Model implements ArrayAccess
      * (non-PHPdoc)
      * @see ArrayAccess::offsetExists()
      */
-    public function offsetExists ($offset)
+    public function offsetExists ($offset): bool
     {
         return property_exists($this, $offset);
     }
@@ -90,6 +90,7 @@ abstract class TimeZoneConvert_Model implements ArrayAccess
      * (non-PHPdoc)
      * @see ArrayAccess::offsetGet()
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet ($offset)
     {
         return $this->$offset;
@@ -99,7 +100,7 @@ abstract class TimeZoneConvert_Model implements ArrayAccess
      * (non-PHPdoc)
      * @see ArrayAccess::offsetSet()
      */
-    public function offsetSet ($offset, $value)
+    public function offsetSet ($offset, $value): void
     {
         $this->$offset = $value;
     }
@@ -108,7 +109,7 @@ abstract class TimeZoneConvert_Model implements ArrayAccess
      * (non-PHPdoc)
      * @see ArrayAccess::offsetUnset()
      */
-    public function offsetUnset ($offset)
+    public function offsetUnset ($offset): void
     {
         $this->$offset = null;
     }
