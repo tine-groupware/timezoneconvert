@@ -260,7 +260,11 @@ EOT;
         $this->assertTrue(count($transitions) > 7, 'min. 7 transitions should be computed');
         
         $this->assertEquals(-84387600, $transitions[0]['ts']);
-        $this->assertEquals('1967-04-30T07:00:00+0000', $transitions[0]['date']);
+        if (PHP_VERSION_ID < 80200) {
+            $this->assertEquals('1967-04-30T07:00:00+0000', $transitions[0]['date']);
+        } else {
+            $this->assertEquals('1967-04-30T07:00:00+00:00', $transitions[0]['date']);
+        }
         $this->assertEquals(-14400, $transitions[0]['offset']);
         $this->assertEquals(TRUE, $transitions[0]['isdst']);
         $this->assertEquals('EDT', $transitions[0]['abbr']);
