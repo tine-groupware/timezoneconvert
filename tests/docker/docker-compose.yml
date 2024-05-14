@@ -22,6 +22,17 @@ services:
       # needed by PHPSTORM for debugging
       PHP_IDE_CONFIG: "serverName=timezoneconvert"
 
+  cli82:
+    build: ./php82/
+    volumes:
+      - ../../:/src/
+      - ./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+    networks:
+      - external_network
+    environment:
+      # needed by PHPSTORM for debugging
+      PHP_IDE_CONFIG: "serverName=timezoneconvert"
+
 networks:
   external_network:
     driver: bridge

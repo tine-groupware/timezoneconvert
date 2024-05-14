@@ -17,7 +17,16 @@
 class TimeZoneConvert_VTimeZone
 {
     const EOL = "\r\n";
-    
+
+    protected $dateFormat = 'Y-m-d\TH:i:sP'; // DateTime::DATE_ATOM NOTE: In contrast to the docs Y is used instead of X
+
+    public function __construct()
+    {
+        if (PHP_VERSION_ID < 80200) {
+            $this->dateFormat = 'Y-m-d\TH:i:sO'; // DateTime::ISO8601;
+        }
+    }
+
     /**
      * gets php's DateTimeZone identifier from given VTIMEZONE and optional prodid
      * 
@@ -65,7 +74,7 @@ class TimeZoneConvert_VTimeZone
         
         $timezone = new DateTimeZone($tzid);
         $transitions = TimeZoneConvert_Transition::getTransitions($timezone, $from, $until);
-        
+
         $splitedTransitions = array(
             'DAYLIGHT' => $transitions->filter('isdst', TRUE),
             'STANDART' => $transitions->filter('isdst', FALSE),
@@ -80,7 +89,9 @@ class TimeZoneConvert_VTimeZone
             $transitionRule = TimeZoneConvert_TransitionRule::createFromTransition($transitions->getFirst());
             foreach($transitions as $transition) {
                 $expectedTransitionDate = $transitionRule->computeTransitionDate(substr($transition['time'], 0, 4));
-                if ($expectedTransitionDate->format(DateTime::ISO8601) != $transition['time']) {
+                if ($expectedTransitionDate->format($this->dateFormat) != $transition['time']) {
+                    echo $expectedTransitionDate->format($this->dateFormat) ."\n";
+                    echo $transition['time'] ."\n";
                     $useRrule = FALSE;
                     break;
                 }
@@ -95,7 +106,7 @@ class TimeZoneConvert_VTimeZone
                 
                 foreach ($backTransitions as $backTransition) {
                     $expectedTransitionDate = $transitionRule->computeTransitionDate(substr($backTransition['time'], 0, 4));
-                    if ($expectedTransitionDate->format(DateTime::ISO8601) != $backTransition['time']) {
+                    if ($expectedTransitionDate->format($this->dateFormat) != $backTransition['time']) {
                         break;
                     }
                     
@@ -231,7 +242,7 @@ class TimeZoneConvert_VTimeZone
             foreach($transitionDates as $transitionDate) {
                 $transitions->addModel(new TimeZoneConvert_Transition(array(
                     'ts'     => $transitionDate->getTimestamp(),
-                    'date'   => $transitionDate->format(DateTime::ISO8601),
+                    'date'   => $transitionDate->format($this->dateFormat),
                     'offset' => $transitionRule->offset,
                     'isdst'  => $transitionRule->isdst,
                     'abbr'   => $transitionRule->abbr,

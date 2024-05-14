@@ -18,6 +18,7 @@
     },
     "scripts": {
         "php8test": "cd tests/docker; docker-compose run cli8 ash -c 'cd /src/tests; ../vendor/bin/phpunit --color TimeZoneConvert/AllTests.php'; cd ../..;",
-        "php81test": "cd tests/docker; docker-compose run cli81 ash -c 'cd /src/tests; ../vendor/bin/phpunit --color TimeZoneConvert/AllTests.php'; cd ../..;"
+        "php81test": "cd tests/docker; docker-compose run cli81 ash -c 'cd /src/tests; ../vendor/bin/phpunit --color TimeZoneConvert/AllTests.php'; cd ../..;",
+        "php82test": "cd tests/docker; docker-compose run cli82 ash -c 'cd /src/tests; ../vendor/bin/phpunit --color TimeZoneConvert/AllTests.php'; cd ../..;"
     }
 }
